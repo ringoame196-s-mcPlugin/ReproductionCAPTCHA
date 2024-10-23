@@ -2,8 +2,8 @@ package com.github.ringoame196_s_mcPlugin.managers
 
 import java.sql.Connection
 import java.sql.DriverManager
-import java.sql.SQLException
 import java.sql.PreparedStatement
+import java.sql.SQLException
 import java.sql.Statement
 
 class DataBaseManager {
