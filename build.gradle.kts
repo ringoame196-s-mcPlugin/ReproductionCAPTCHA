@@ -33,32 +33,30 @@ configurations["implementation"].extendsFrom(shadowImplementation)
 dependencies {
     shadowImplementation(kotlin("stdlib"))
     compileOnly("org.spigotmc:spigot-api:$pluginVersion-R0.1-SNAPSHOT")
+    val sqliteVersion = "3.46.1.0"
+    implementation("org.xerial:sqlite-jdbc:$sqliteVersion") // データベース
 }
 
 configure<BukkitPluginDescription> {
-    main = "@group@.Main"
+    main = "com.github.ringoame196_s_mcPlugin.Main"
     version = pluginVersion
     apiVersion = "1." + pluginVersion.split(".")[1]
-    author = "@author@"
-    /*
-    コマンド追加用
+    author = "ringoame196_s_mcPlugin"
+
     commands {
-        register("test") {
-            description = "This is a test command!"
-            aliases = listOf("t")
-            permission = "testplugin.test"
-            usage = "Just run the command!"
+        register("captcha") {
+            description = "captchaコマンド";
+            usage = "/captcha <auth,check> <入力>"
         }
     }
-    */
 }
 
 tasks.withType<ShadowJar> {
     configurations = listOf(shadowImplementation)
     archiveClassifier.set("")
-    relocate("kotlin", "@group@.libs.kotlin")
-    relocate("org.intellij.lang.annotations", "@group@.libs.org.intellij.lang.annotations")
-    relocate("org.jetbrains.annotations", "@group@.libs.org.jetbrains.annotations")
+    relocate("kotlin", "com.github.ringoame196_s_mcPlugin.libs.kotlin")
+    relocate("org.intellij.lang.annotations", "com.github.ringoame196_s_mcPlugin.libs.org.intellij.lang.annotations")
+    relocate("org.jetbrains.annotations", "com.github.ringoame196_s_mcPlugin.libs.org.jetbrains.annotations")
 }
 
 tasks.named("build") {
