@@ -8,5 +8,6 @@ object DataConst {
     const val MC_UUID = "mcUUID"
     const val AUTH_KEY = "authKey"
 
+    // playerDataファイル用
     const val AUTH_WITHIN_PLAYER = "authWithinPlayer"
 }

@@ -15,6 +15,10 @@ class YmlFileManager {
         val ymlFile = acquisitionYml(file)
         return ymlFile.getString(key)
     }
+    fun acquisitionListValue(file: File, key: String): MutableList<String> {
+        val ymlFile = acquisitionYml(file)
+        return ymlFile.getStringList(key)
+    }
     fun setValue(file: File, key: String, value: Any?) {
         val ymlFile = acquisitionYml(file)
         ymlFile.set(key, value)

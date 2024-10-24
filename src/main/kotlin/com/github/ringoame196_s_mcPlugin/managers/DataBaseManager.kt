@@ -3,6 +3,7 @@ package com.github.ringoame196_s_mcPlugin.managers
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.PreparedStatement
+import java.sql.ResultSet
 import java.sql.SQLException
 import java.sql.Statement
 
@@ -28,6 +29,39 @@ class DataBaseManager {
         } finally {
             disconnect(connection) // 切断
         }
+    }
+
+    fun acquisitionBooleanValue(dbFilePath: String, sql: String, parameters: List<Any>): Boolean {
+        var exists = false
+
+        val statement: Statement?
+        var connection: Connection? = null
+        var preparedStatement: PreparedStatement? = null
+        var resultSet: ResultSet? = null
+
+        try {
+            statement = connection(dbFilePath) // 接続
+            connection = statement?.connection
+            preparedStatement = connection?.prepareStatement(sql)
+
+            // パラメータをバインド
+            parameters.forEachIndexed { index, param ->
+                preparedStatement?.setObject(index + 1, param)
+            }
+
+            resultSet = preparedStatement?.executeQuery()
+            if (resultSet?.next() == true) {
+                exists = resultSet.getBoolean(1) // EXISTS の結果を取得
+            }
+        } catch (e: SQLException) {
+            println("SQL Error: ${e.message}")
+        } finally {
+            resultSet?.close()
+            preparedStatement?.close()
+            connection?.close()
+        }
+
+        return exists
     }
 
     fun acquisitionStringValue(dbFilePath: String, sql: String, parameters: List<Any>, label: String): String? {
