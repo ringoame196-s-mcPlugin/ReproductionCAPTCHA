@@ -26,7 +26,7 @@ class Main : JavaPlugin() {
         val dataBaseManager = DataBaseManager()
         if (!authDataFile.exists()) {
             val makeAuthKeyTableCommand =
-                "CREATE TABLE ${DataConst.TABLE_NAME}(${DataConst.MC_UUID} VARCHAR(36) NOT NULL, ${DataConst.AUTH_KEY} VARCHAR(5) NOT NULL);"
+                "CREATE TABLE ${DataConst.TABLE_NAME}(${DataConst.MC_UUID} VARCHAR(36) NOT NULL, ${DataConst.AUTH_KEY} VARCHAR(5) NOT NULL, ${DataConst.MAP_ID} INT NOT NULL);"
             dataBaseManager.runSQLCommand(authDataFilePath, makeAuthKeyTableCommand, mutableListOf())
         }
     }
