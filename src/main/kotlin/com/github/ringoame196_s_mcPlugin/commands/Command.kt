@@ -4,6 +4,7 @@ import com.github.ringoame196_s_mcPlugin.managers.AuthMapManager
 import com.github.ringoame196_s_mcPlugin.managers.AuthPlayerManager
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
+import org.bukkit.Sound
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -12,7 +13,7 @@ import org.bukkit.plugin.Plugin
 
 class Command(plugin: Plugin) : CommandExecutor {
     private val authPlayerManager = AuthPlayerManager(plugin)
-    private val authMapManager = AuthMapManager()
+    private val authMapManager = AuthMapManager(plugin)
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (args.size < 2) return false
@@ -37,6 +38,7 @@ class Command(plugin: Plugin) : CommandExecutor {
             return
         }
         val uuid = sender.uniqueId.toString()
+        val sound = Sound.BLOCK_ANVIL_USE
 
         if (!authPlayerManager.isActProhibitingPlayer(uuid)) return
 
@@ -44,9 +46,9 @@ class Command(plugin: Plugin) : CommandExecutor {
 
         if (auth) {
             val message = "${ChatColor.YELLOW}認証完了しました"
-            authPlayerManager.reduceAuthWithingPlayer(uuid)
             authPlayerManager.deleteToDB(uuid)
             sender.sendMessage(message)
+            sender.playSound(sender, sound, 1f, 1f)
         } else authSettingProcess(sender)
     }
 
@@ -73,12 +75,7 @@ class Command(plugin: Plugin) : CommandExecutor {
 
     private fun authSettingProcess(selectPlayer: Player) {
         val message = "${ChatColor.YELLOW}BOT認証をしてください \n/captcha auth <入力>"
-        val uuid = selectPlayer.uniqueId.toString()
-        authPlayerManager.additionAuthWithingPlayer(uuid)
-        val authKey = authPlayerManager.creationAuthKey()
-        authPlayerManager.saveToDB(uuid, authKey)
-        val authMap = authMapManager.makeAuthMap(authKey)
-        selectPlayer.inventory.addItem(authMap)
+        authMapManager.giveAuthMap(selectPlayer)
         selectPlayer.sendMessage(message)
     }
 }

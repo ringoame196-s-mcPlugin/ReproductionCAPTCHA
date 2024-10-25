@@ -11,4 +11,7 @@ object DataConst {
 
     // playerDataファイル用
     const val AUTH_WITHIN_PLAYER = "authWithinPlayer"
+
+    // 認証画像マップ
+    const val AUTH_MAP_NAME = "認証画像"
 }
