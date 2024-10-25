@@ -2,6 +2,7 @@ package com.github.ringoame196_s_mcPlugin.events
 
 import com.github.ringoame196_s_mcPlugin.managers.AuthPlayerManager
 import org.bukkit.ChatColor
+import org.bukkit.Sound
 import org.bukkit.event.Cancellable
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -19,11 +20,14 @@ class PlayerAct(plugin: Plugin) : Listener {
         if (e !is PlayerEvent) return
         val player = e.player
         val uuid = player.uniqueId.toString()
-        val message = "${ChatColor.RED}BOT認証をしてください \n/captcha auth <入力>"
+        val title = "${ChatColor.RED}BOT認証をしてください"
+        val subTitle = "${ChatColor.YELLOW}/captcha auth <入力>"
+        val sound = Sound.BLOCK_NOTE_BLOCK_BELL
 
         if (authPlayerManager.isActProhibitingPlayer(uuid)) {
             e.isCancelled = true
-            player.sendMessage(message)
+            player.sendTitle(title, subTitle)
+            player.playSound(player, sound, 1f, 1f)
         }
     }
 
