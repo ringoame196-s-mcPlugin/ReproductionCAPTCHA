@@ -3,6 +3,10 @@
 ## プラグイン説明
 なんちゃってCaptcha
 
+
+https://github.com/user-attachments/assets/2f04b2cd-92b8-4e4d-afd0-4a0dc481a187
+
+
 ## コマンド
 - /captcha <auth> <認証キー> - 認証する
 - /captcha <check> <セレクター> - セレクターにBOT認証を実行する
