@@ -1,12 +1,15 @@
 # ReproductionCAPTCHA
 
 ## プラグイン説明
+なんちゃってCaptcha
 
 ## コマンド
+- /captcha <auth> <認証キー> - 認証する
+- /captcha <check> <セレクター> - セレクターにBOT認証を実行する
 
 ## 使い方
-
-## configファイル
+- /captcha <auth> <認証キー> - 認証する
+- /captcha <check> <セレクター> - セレクターにBOT認証を実行する
 
 ## 開発環境
 - Minecraft Version : 1.20.1
