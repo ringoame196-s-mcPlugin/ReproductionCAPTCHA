@@ -9,9 +9,6 @@ object DataConst {
     const val AUTH_KEY = "authKey"
     const val MAP_ID = "mapID"
 
-    // playerDataファイル用
-    const val AUTH_WITHIN_PLAYER = "authWithinPlayer"
-
     // 認証画像マップ
     const val AUTH_MAP_NAME = "認証画像"
 }
