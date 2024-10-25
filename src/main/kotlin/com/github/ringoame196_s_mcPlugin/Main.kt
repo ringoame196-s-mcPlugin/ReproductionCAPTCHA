@@ -13,7 +13,6 @@ class Main : JavaPlugin() {
         super.onEnable()
         val plugin = this
         makeDatabaseFile(plugin)
-        saveResource("PlayerData.yml", false)
         server.pluginManager.registerEvents(PlayerAct(plugin), plugin)
         val command = getCommand("captcha")
         command!!.setExecutor(Command(plugin))
