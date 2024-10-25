@@ -67,9 +67,11 @@ class Command(plugin: Plugin) : CommandExecutor {
         val selectPlayers = Bukkit.selectEntities(sender, input)
 
         for (selectPlayer in selectPlayers) {
+            val message = "${ChatColor.YELLOW}[認証] ${selectPlayer.name}をCaptcha認証します"
             selectPlayer as? Player ?: continue
             if (authPlayerManager.isActProhibitingPlayer(selectPlayer.uniqueId.toString())) continue
             authSettingProcess(selectPlayer)
+            sender.sendMessage(message)
         }
     }
 
